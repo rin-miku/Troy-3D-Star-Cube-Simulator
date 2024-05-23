@@ -14,6 +14,7 @@ using DG.Tweening;
 /// </summary>
 public class Rubik : MonoBehaviour
 {
+    public Transform rubikRoot;
     public Transform rotationRoot;
     public float rotationTime = 0.5f;
 
@@ -109,6 +110,11 @@ public class Rubik : MonoBehaviour
         {
             ExecuteOperation(Operation.ZCCW);
         }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ResetRubik();
+        }
     }
 
     /// <summary>
@@ -122,10 +128,11 @@ public class Rubik : MonoBehaviour
         {
             piece.InitPiece();
         }
-        // 需要射线检测的面片(patch)添加 MeshCollider
+        // 需要射线检测的面片(patch)添加 MeshCollider 和 PatchMaterial 
         foreach(GameObject patch in GameObject.FindGameObjectsWithTag("Patch"))
         {
             patch.AddComponent<MeshCollider>();
+            patch.AddComponent<PatchMaterial>();
         }
     }
 
@@ -161,6 +168,10 @@ public class Rubik : MonoBehaviour
         BehindCCWOperation.Init();
     }
 
+    /// <summary>
+    /// 执行具体旋转操作
+    /// </summary>
+    /// <param name="operation"></param>
     private void ExecuteOperation(Operation operation)
     {
         switch (operation)
@@ -223,6 +234,12 @@ public class Rubik : MonoBehaviour
         Debug.Log($"执行操作 {operation}");
     }
 
+    /// <summary>
+    /// 统一做执行操作
+    /// </summary>
+    /// <param name="rotationEuler"></param>
+    /// <param name="piecesCoord"></param>
+    /// <param name="rotationMatrix"></param>
     private void RubikRotate(Vector3 rotationEuler, List<Vector3Int> piecesCoord,  Matrix4x4 rotationMatrix)
     {
         if (isRotation) return;
@@ -271,6 +288,19 @@ public class Rubik : MonoBehaviour
         foreach (PieceBase piece in GetSurfacePieces(piecesCoord))
         {
             piece.SetPieceCoord(Vector3Int.RoundToInt(matrix.MultiplyPoint3x4(piece.coord)));
+        }
+    }
+
+    /// <summary>
+    /// 重置状态
+    /// </summary>
+    public void ResetRubik()
+    {
+        rubikRoot.rotation = new Quaternion(0f, 0f, 0f, 0f);
+
+        foreach(GameObject patch in GameObject.FindGameObjectsWithTag("Patch"))
+        {
+            patch.GetComponent<MeshRenderer>().material = patch.GetComponent<PatchMaterial>().patchMaterial;
         }
     }
 

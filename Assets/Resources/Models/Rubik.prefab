@@ -8577,8 +8577,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 20, y: 20, z: 20}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 351779913586462382}
   m_Father: {fileID: 0}
@@ -8595,7 +8595,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8727425534c57944b4b650e15200e86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rubikRoot: {fileID: 5904776916714574447}
   rotationRoot: {fileID: 2137426688570061150}
+  rotationTime: 0.2
 --- !u!64 &3672656723328273519
 MeshCollider:
   m_ObjectHideFlags: 0

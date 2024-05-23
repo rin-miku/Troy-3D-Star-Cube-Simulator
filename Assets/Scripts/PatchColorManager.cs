@@ -8,15 +8,21 @@ public class PatchColorManager : MonoBehaviour
     private RaycastHit raycastHit;
     private GameObject patch;
 
-    [Header("Patch Materials")]
     public List<Material> patchMaterials;
 
     private void Update()
     {
-        PatchRaycastCheck();
+        if(Application.platform == RuntimePlatform.Android)
+        {
+            TapRaycast();
+        }
+        else
+        {
+            MouseRaycast();
+        }
     }
 
-    private void PatchRaycastCheck()
+    private void MouseRaycast()
     {
         if (Input.GetMouseButtonDown(0))
         {
@@ -25,6 +31,23 @@ public class PatchColorManager : MonoBehaviour
             {
                 if(raycastHit.transform.tag == "Patch")
                 {
+                    SetPatchColor(1);
+                    patch = raycastHit.transform.gameObject;
+                }
+            }
+        }
+    }
+
+    private void TapRaycast()
+    {
+        if(Input.touchCount == 1)
+        {
+            ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            if(Physics.Raycast(ray, out raycastHit))
+            {
+                if (raycastHit.transform.tag == "Patch")
+                {
+                    SetPatchColor(1);
                     patch = raycastHit.transform.gameObject;
                 }
             }
