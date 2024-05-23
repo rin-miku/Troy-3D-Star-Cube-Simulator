@@ -12,9 +12,19 @@ using UnityEngine;
 /// 0 1 0
 /// 1 0 0
 /// </summary>
-public class UpSurface : SurfaceBase
+public static class UpSurface
 {
-    public override void InitMatrix()
+    public static Matrix4x4 cwRotationMatrix = new Matrix4x4();
+    public static Matrix4x4 ccwRotationMatrix = new Matrix4x4();
+    public static List<Vector3Int> piecesCoord = new List<Vector3Int>();
+
+    public static void Init()
+    {
+        InitMatrix();
+        InitPieces();
+    }
+
+    private static void InitMatrix()
     {
         cwRotationMatrix.SetRow(0, new Vector4(0, 0, 1, 0));
         cwRotationMatrix.SetRow(1, new Vector4(0, 1, 0, 0));
@@ -27,7 +37,7 @@ public class UpSurface : SurfaceBase
         ccwRotationMatrix.SetRow(3, new Vector4(0, 0, 0, 0));
     }
 
-    public override void InitPieces()
+    private static void InitPieces()
     {
         piecesCoord.Add(new Vector3Int(0, 1, 0));
 

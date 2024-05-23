@@ -14,6 +14,12 @@ public enum Operation
     FrontCCW,
     BehindCW,
     BehindCCW,
+    XCW,
+    XCCW,
+    YCW,
+    YCCW,
+    ZCW,
+    ZCCW,
     Error
 }
 

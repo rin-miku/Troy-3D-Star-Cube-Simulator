@@ -4151,6 +4151,18 @@ PrefabInstance:
       value: Rubik
       objectReference: {fileID: 0}
     - target: {fileID: 5904776916714574447, guid: 3f21ec7aea2618a4d92d29edac4190d9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5904776916714574447, guid: 3f21ec7aea2618a4d92d29edac4190d9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5904776916714574447, guid: 3f21ec7aea2618a4d92d29edac4190d9, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5904776916714574447, guid: 3f21ec7aea2618a4d92d29edac4190d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -4189,6 +4201,10 @@ PrefabInstance:
     - target: {fileID: 5904776916714574447, guid: 3f21ec7aea2618a4d92d29edac4190d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5904776916714574447, guid: 3f21ec7aea2618a4d92d29edac4190d9, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4959,6 +4975,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1721348657}
   - component: {fileID: 1721348656}
+  - component: {fileID: 1721348658}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -4993,6 +5010,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1721348658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721348655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8396be65656b16d44b0076771fea24bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patchMaterials:
+  - {fileID: 2100000, guid: baa6eb650b5f64447b90f8933673e4a5, type: 2}
+  - {fileID: 2100000, guid: a2deb0594661f5445b1aa149926de9dd, type: 2}
+  - {fileID: 2100000, guid: fdcf478bbb8b24444be38195e10f5980, type: 2}
+  - {fileID: 2100000, guid: e11de005153a7564bb13d873a8bd5103, type: 2}
 --- !u!1 &1755270474
 GameObject:
   m_ObjectHideFlags: 0
