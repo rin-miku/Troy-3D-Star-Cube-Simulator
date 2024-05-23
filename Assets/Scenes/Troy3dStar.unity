@@ -4146,6 +4146,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1160820987317374419, guid: 3f21ec7aea2618a4d92d29edac4190d9, type: 3}
+      propertyPath: rotationTime
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5423747520675958586, guid: 3f21ec7aea2618a4d92d29edac4190d9, type: 3}
       propertyPath: m_Name
       value: Rubik
@@ -4975,6 +4979,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1721348657}
   - component: {fileID: 1721348656}
+  - component: {fileID: 1721348659}
   - component: {fileID: 1721348658}
   m_Layer: 0
   m_Name: GameController
@@ -5027,6 +5032,18 @@ MonoBehaviour:
   - {fileID: 2100000, guid: a2deb0594661f5445b1aa149926de9dd, type: 2}
   - {fileID: 2100000, guid: fdcf478bbb8b24444be38195e10f5980, type: 2}
   - {fileID: 2100000, guid: e11de005153a7564bb13d873a8bd5103, type: 2}
+--- !u!114 &1721348659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721348655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 252a3d4daf0f8f847a97918de327f56e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1755270474
 GameObject:
   m_ObjectHideFlags: 0

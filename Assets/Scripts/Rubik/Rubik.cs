@@ -15,6 +15,7 @@ using DG.Tweening;
 public class Rubik : MonoBehaviour
 {
     public Transform rotationRoot;
+    public float rotationTime = 0.5f;
 
     private bool isRotation = false;
     private List<PieceBase> pieces = new List<PieceBase>();
@@ -77,7 +78,7 @@ public class Rubik : MonoBehaviour
         {
             ExecuteOperation(Operation.BehindCW);
         }
-        if (Input.GetKeyDown(KeyCode.Plus))
+        if (Input.GetKeyDown(KeyCode.Equals))
         {
             ExecuteOperation(Operation.BehindCCW);
         }
@@ -180,7 +181,7 @@ public class Rubik : MonoBehaviour
                 RubikRotate(LeftCWOperation.rotationEuler, LeftSurface.piecesCoord, LeftSurface.cwRotationMatrix);
                 break;
             case Operation.LeftCCW:
-                RubikRotate(LeftCWOperation.rotationEuler, LeftSurface.piecesCoord, LeftSurface.ccwRotationMatrix);
+                RubikRotate(LeftCCWOperation.rotationEuler, LeftSurface.piecesCoord, LeftSurface.ccwRotationMatrix);
                 break;
             case Operation.RightCW:
                 RubikRotate(RightCWOperation.rotationEuler, RightSurface.piecesCoord, RightSurface.cwRotationMatrix);
@@ -248,7 +249,7 @@ public class Rubik : MonoBehaviour
             piece.transform.SetParent(rotationRoot);
         }
         // 旋转 完成后释放
-        rotationRoot.DORotate(eulers, 1f)
+        rotationRoot.DOLocalRotate(eulers, rotationTime)
             .SetEase(Ease.Linear)
             .OnComplete(() => 
             {
@@ -288,6 +289,7 @@ public class Rubik : MonoBehaviour
                 pieces.Add(piece);
             }
         }
+
         return pieces;
     }
 
