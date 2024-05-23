@@ -13,6 +13,7 @@ public class UIController : MonoBehaviour
     public Button addOperation;
     public Button resetRubik;
     public List<Button> operationButtons;
+    public Transform operationButtonPanel;
 
     [Header("MessagePanel")]
     public TextMeshProUGUI messageText;
@@ -21,6 +22,7 @@ public class UIController : MonoBehaviour
     [Header("InputPanel")]
     public TMP_InputField inputField;
 
+    private bool operationButtonPanelIsOpen = false;
     private OperationController operationController;
 
     void Start()
@@ -73,7 +75,7 @@ public class UIController : MonoBehaviour
 
     private void OnClickAddOperationHandler()
     {
-        // 打开操作面板
+        operationButtonPanel.localScale = operationButtonPanelIsOpen ? Vector3.zero : Vector3.one;
     }
 
     private void OnClickResetRubikHandler()

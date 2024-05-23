@@ -172,7 +172,7 @@ public class Rubik : MonoBehaviour
     /// 执行具体旋转操作
     /// </summary>
     /// <param name="operation"></param>
-    private void ExecuteOperation(Operation operation)
+    public void ExecuteOperation(Operation operation)
     {
         switch (operation)
         {
@@ -228,7 +228,7 @@ public class Rubik : MonoBehaviour
                 RubikRotate(FrontCWOperation.rotationEuler, GetAllPiecesCoord(), FrontSurface.cwRotationMatrix);
                 break;
             case Operation.ZCCW:
-                RubikRotate(FrontCCWOperation.rotationEuler, GetAllPiecesCoord(), FrontSurface.cwRotationMatrix);
+                RubikRotate(FrontCCWOperation.rotationEuler, GetAllPiecesCoord(), FrontSurface.ccwRotationMatrix);
                 break;
         }
         Debug.Log($"执行操作 {operation}");

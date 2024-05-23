@@ -11,12 +11,14 @@ public class OperationController : MonoBehaviour
     private LinkedListNode<Operation> addOperationNode = null;
 
     private UIController uiController;
+    private Rubik rubik;
 
     private bool isExecuting = false;
 
     private void Start()
     {
         uiController = GameObject.Find("UI").GetComponent<UIController>();
+        rubik = GameObject.Find("Rubik").GetComponent<Rubik>();
 
         InitOperation();
     }
@@ -87,7 +89,7 @@ public class OperationController : MonoBehaviour
             // 有下一个节点就执行操作
             operationNode = operationNode.Next;
             addOperationNode = operationNode;
-            ExecuteOperation(operationNode.Value);
+            rubik.ExecuteOperation(operationNode.Value);
         }
         UpdateOperationsText();
     }
@@ -102,7 +104,7 @@ public class OperationController : MonoBehaviour
         {
             operationNode = operationNode.Previous;
             addOperationNode = operationNode;
-            ExecuteOperation(operationNode.Value);
+            rubik.ExecuteOperation(operationNode.Value);
         }
         UpdateOperationsText();
     }
