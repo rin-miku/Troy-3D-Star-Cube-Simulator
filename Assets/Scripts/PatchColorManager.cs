@@ -31,7 +31,7 @@ public class PatchColorManager : MonoBehaviour
             {
                 if(raycastHit.transform.tag == "Patch")
                 {
-                    SetPatchColor(1);
+                    //SetPatchColor(1);
                     patch = raycastHit.transform.gameObject;
                 }
             }
@@ -52,7 +52,7 @@ public class PatchColorManager : MonoBehaviour
                     {
                         if (raycastHit.transform.tag == "Patch")
                         {
-                            SetPatchColor(1);
+                            //SetPatchColor(1);
                             patch = raycastHit.transform.gameObject;
                         }
                     }

@@ -21,6 +21,14 @@ public class OperationController : MonoBehaviour
         InitOperation();
     }
 
+    private void Update()
+    {
+        if (uiController.isAutoExecute)
+        {
+            DoOperation();
+        }
+    }
+
     private void InitOperation()
     {
         // 初始化操作名
@@ -93,7 +101,8 @@ public class OperationController : MonoBehaviour
         // 寻找下一个结点
         if(operationNode.Next == null)
         {
-            Utils.PrintLog("没有下一步操作啦");
+            uiController.OnClickAutoExecuteHandler();
+            Utils.PrintLog("没有下一步操作啦", true);
         }
         else
         {
@@ -111,7 +120,7 @@ public class OperationController : MonoBehaviour
         // 寻找上一个结点
         if (operationNode.Previous == null)
         {
-            Utils.PrintLog("没有上一步操作啦");
+            Utils.PrintLog("没有上一步操作啦", true);
         }
         else
         {

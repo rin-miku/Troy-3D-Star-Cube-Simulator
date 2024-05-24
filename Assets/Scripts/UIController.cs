@@ -11,17 +11,25 @@ public class UIController : MonoBehaviour
     public Button nextOperation;
     public Button clearOperation;
     public Button addOperation;
+    public Button autoExecute;
     public Button resetRubik;
+    public Button randomRubik;
     public List<Button> operationButtons;
     public Transform operationButtonPanel;
+    public Transform otherButtons;
+    public Sprite play;
+    public Sprite pause;
 
     [Header("MessagePanel")]
     public TextMeshProUGUI messageText;
     public TextMeshProUGUI operationQueueText;
 
-    [Header("InputPanel")]
-    public TMP_InputField inputField;
+    [Header("AboutPanel")]
+    public Button aboutButton;
+    public Button backButton;
+    public GameObject aboutPanel;
 
+    public bool isAutoExecute = false;
     private bool operationButtonPanelIsOpen = false;
     private Rubik rubik;
     private OperationController operationController;
@@ -37,17 +45,17 @@ public class UIController : MonoBehaviour
         nextOperation.onClick.AddListener(OnClickNextOperationHandler);
         clearOperation.onClick.AddListener(OnClickClearOperationHandler);
         addOperation.onClick.AddListener(OnClickAddOperationHandler);
-        resetRubik.onClick.AddListener(OnClickResetRubikHandler);
+        autoExecute.onClick.AddListener(OnClickAutoExecuteHandler);
+        resetRubik.onClick.AddListener(OnClickResetRubikHandler);       
+        randomRubik.onClick.AddListener(OnClickRandomRubikHandler);
+
+        aboutButton.onClick.AddListener(OnClickAboutHandler);
+        backButton.onClick.AddListener(OnClickBackHandler);
 
         foreach(Button operationButton in operationButtons)
         {
             operationButton.onClick.AddListener(() => { OnClickOperationButtonHandler(operationButton.transform.name); });
         }
-    }
-
-    void Update()
-    {
-        
     }
 
     public void SetMessageText(string msg)
@@ -72,22 +80,44 @@ public class UIController : MonoBehaviour
 
     private void OnClickClearOperationHandler()
     {
+        Utils.PrintLog("已清空所有操作", true);
         operationController.ClearOperation();
     }
 
     private void OnClickAddOperationHandler()
     {
         operationButtonPanel.localScale = operationButtonPanelIsOpen ? Vector3.zero : Vector3.one;
+        operationButtonPanelIsOpen = !operationButtonPanelIsOpen;
+    }
+
+    public void OnClickAutoExecuteHandler()
+    {
+        Utils.PrintLog("自动执行剩余操作...", true);
+        isAutoExecute = !isAutoExecute;
+        otherButtons.localScale = isAutoExecute ? Vector3.zero : Vector3.one;
+        autoExecute.GetComponent<Image>().sprite = isAutoExecute ? pause : play;
     }
 
     private void OnClickRandomRubikHandler()
     {
+        Utils.PrintLog("正在打乱...", true);
         rubik.RandomRubik();
+        OnClickAutoExecuteHandler();
     }
 
     private void OnClickResetRubikHandler()
     {
         rubik.ResetRubik();
+    }
+
+    private void OnClickAboutHandler()
+    {
+        aboutPanel.transform.localScale = Vector3.one;
+    }
+
+    private void OnClickBackHandler()
+    {
+        aboutPanel.transform.localScale = Vector3.zero;
     }
 
     private void OnClickOperationButtonHandler(string opName)

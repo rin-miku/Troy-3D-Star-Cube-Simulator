@@ -6,14 +6,18 @@ using DG.Tweening;
 public class SkyBoxManager : MonoBehaviour
 {
     public float rotateTime = 60f;
+
     private void Start()
     {  
         transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        Tween tween = transform.DORotate(new Vector3(0f, 359.9f, 0f), rotateTime)
-            .SetEase(Ease.Linear) 
+        float newValue = 0f;
+        DOTween.To(() => newValue, x => newValue = x, 360f, rotateTime)
+            .OnUpdate(()=> 
+            {
+                transform.rotation = Quaternion.Euler(0f, newValue, 0f);
+            })
+            .SetEase(Ease.Linear)
             .SetLoops(-1, LoopType.Restart);
-
-        tween.Play();
     }
 }
