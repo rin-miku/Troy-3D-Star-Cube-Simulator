@@ -13,8 +13,6 @@ public class OperationController : MonoBehaviour
     private UIController uiController;
     private Rubik rubik;
 
-    private bool isExecuting = false;
-
     private void Start()
     {
         uiController = GameObject.Find("UI").GetComponent<UIController>();
@@ -26,6 +24,12 @@ public class OperationController : MonoBehaviour
     private void InitOperation()
     {
         // 初始化操作名
+        operationName.Add("x", Operation.XCW);
+        operationName.Add("x'", Operation.XCCW);
+        operationName.Add("y", Operation.YCW);
+        operationName.Add("y'", Operation.YCCW);
+        operationName.Add("z", Operation.ZCW);
+        operationName.Add("z'", Operation.ZCCW);
         operationName.Add("U", Operation.UpCW);
         operationName.Add("U'", Operation.UpCCW);
         operationName.Add("D", Operation.DownCW);
@@ -40,6 +44,12 @@ public class OperationController : MonoBehaviour
         operationName.Add("B'", Operation.BehindCCW);
         operationName.Add("", Operation.Error);
         // 初始化操作类型
+        operationType.Add(Operation.XCW, "x");
+        operationType.Add(Operation.XCCW, "x'");
+        operationType.Add(Operation.YCW, "y");
+        operationType.Add(Operation.YCCW, "y'");
+        operationType.Add(Operation.ZCW, "z");
+        operationType.Add(Operation.ZCCW, "z'");
         operationType.Add(Operation.UpCW, "U");
         operationType.Add(Operation.UpCCW, "U'");
         operationType.Add(Operation.DownCW, "D");
@@ -79,6 +89,7 @@ public class OperationController : MonoBehaviour
 
     public void DoOperation()
     {
+        if (rubik.isRotation) return;
         // 寻找下一个结点
         if(operationNode.Next == null)
         {
@@ -96,12 +107,15 @@ public class OperationController : MonoBehaviour
 
     public void UndoOperation()
     {
+        if (rubik.isRotation) return;
+        // 寻找上一个结点
         if (operationNode.Previous == null)
         {
             Utils.PrintLog("没有上一步操作啦");
         }
         else
         {
+            // 有上一个节点就执行操作
             operationNode = operationNode.Previous;
             addOperationNode = operationNode;
             rubik.ExecuteOperation(operationNode.Value);
@@ -123,6 +137,9 @@ public class OperationController : MonoBehaviour
         UpdateOperationsText();
     }
 
+    /// <summary>
+    /// 更新操作数组
+    /// </summary>
     public void UpdateOperationsText()
     {
         StringBuilder sb = new StringBuilder();
@@ -146,41 +163,10 @@ public class OperationController : MonoBehaviour
         uiController.SetOperationQueueText(sb.ToString());
     }
 
-    public void ExecuteOperation(Operation operation)
-    {
-        isExecuting = true;
-
-        switch (operation)
-        {
-            case Operation.UpCW:
-                break;
-            case Operation.UpCCW:
-                break;
-            case Operation.DownCW:
-                break;
-            case Operation.DownCCW:
-                break;
-            case Operation.LeftCW:
-                break;
-            case Operation.LeftCCW:
-                break;
-            case Operation.RightCW:
-                break;
-            case Operation.RightCCW:
-                break;
-            case Operation.FrontCW:
-                break;
-            case Operation.FrontCCW:
-                break;
-            case Operation.BehindCW:
-                break;
-            case Operation.BehindCCW:
-                break;
-            case Operation.Error:
-                break;
-        }
-    }
-
+    /// <summary>
+    /// 解析操作字符串
+    /// </summary>
+    /// <param name="cmd"></param>
     public void ParseOperationCommand(string cmd)
     {
         List<Operation> operationList = new List<Operation>();
@@ -216,6 +202,11 @@ public class OperationController : MonoBehaviour
         UpdateOperationList(operationList);
     }
 
+    /// <summary>
+    /// 根据操作名获取操作类型
+    /// </summary>
+    /// <param name="opName"></param>
+    /// <returns></returns>
     public Operation GetOperationType(string opName)
     {
         Operation Operation;
@@ -230,6 +221,11 @@ public class OperationController : MonoBehaviour
         } 
     }
 
+    /// <summary>
+    /// 根据操作类型获取操作名
+    /// </summary>
+    /// <param name="operation"></param>
+    /// <returns></returns>
     public string GetOperationName(Operation operation)
     {
         string opName;
@@ -242,55 +238,5 @@ public class OperationController : MonoBehaviour
             Utils.PrintLog($"未知的操作类型{operation}，请检查");
             return opName;
         }
-    }
-
-    public Operation GetReverseOperation(Operation operation)
-    {
-        Operation reverseOperation = Operation.Error;
-
-        switch (operation)
-        {
-            case Operation.UpCW:
-                reverseOperation = Operation.UpCCW;
-                break;
-            case Operation.UpCCW:
-                reverseOperation = Operation.UpCW;
-                break;
-            case Operation.DownCW:
-                reverseOperation = Operation.DownCCW;
-                break;
-            case Operation.DownCCW:
-                reverseOperation = Operation.DownCW;
-                break;
-            case Operation.LeftCW:
-                reverseOperation = Operation.LeftCCW;
-                break;
-            case Operation.LeftCCW:
-                reverseOperation = Operation.LeftCW;
-                break;
-            case Operation.RightCW:
-                reverseOperation = Operation.RightCCW;
-                break;
-            case Operation.RightCCW:
-                reverseOperation = Operation.RightCW;
-                break;
-            case Operation.FrontCW:
-                reverseOperation = Operation.FrontCCW;
-                break;
-            case Operation.FrontCCW:
-                reverseOperation = Operation.FrontCW;
-                break;
-            case Operation.BehindCW:
-                reverseOperation = Operation.BehindCCW;
-                break;
-            case Operation.BehindCCW:
-                reverseOperation = Operation.BehindCW;
-                break;
-            case Operation.Error:
-                reverseOperation = Operation.Error;
-                break;
-        }
-
-        return reverseOperation;
     }
 }

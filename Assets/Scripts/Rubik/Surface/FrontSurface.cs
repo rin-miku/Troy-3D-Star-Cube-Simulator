@@ -26,13 +26,13 @@ public static class FrontSurface
 
     private static void InitMatrix()
     {
-        cwRotationMatrix.SetRow(0, new Vector4(0, -1, 0, 0));
-        cwRotationMatrix.SetRow(1, new Vector4(1, 0, 0, 0));
+        cwRotationMatrix.SetRow(0, new Vector4(0, 1, 0, 0));
+        cwRotationMatrix.SetRow(1, new Vector4(-1, 0, 0, 0));
         cwRotationMatrix.SetRow(2, new Vector4(0, 0, 1, 0));
         cwRotationMatrix.SetRow(3, new Vector4(0, 0, 0, 0));
 
-        ccwRotationMatrix.SetRow(0, new Vector4(0, 1, 0, 0));
-        ccwRotationMatrix.SetRow(1, new Vector4(-1, 0, 0, 0));
+        ccwRotationMatrix.SetRow(0, new Vector4(0, -1, 0, 0));
+        ccwRotationMatrix.SetRow(1, new Vector4(1, 0, 0, 0));
         ccwRotationMatrix.SetRow(2, new Vector4(0, 0, 1, 0));
         ccwRotationMatrix.SetRow(3, new Vector4(0, 0, 0, 0));
     }

@@ -18,11 +18,15 @@ public class Rubik : MonoBehaviour
     public Transform rotationRoot;
     public float rotationTime = 0.5f;
 
-    private bool isRotation = false;
+    public bool isRotation = false;
     private List<PieceBase> pieces = new List<PieceBase>();
+
+    private OperationController operationController;
 
     void Start()
     {
+        operationController = GameObject.Find("GameController").GetComponent<OperationController>();
+
         InitRubik();
         InitSurface();
         InitOperation();
@@ -201,10 +205,10 @@ public class Rubik : MonoBehaviour
                 RubikRotate(RightCCWOperation.rotationEuler, RightSurface.piecesCoord, RightSurface.ccwRotationMatrix);
                 break;
             case Operation.FrontCW:
-                RubikRotate(FrontCWOperation.rotationEuler, FrontSurface.piecesCoord, FrontSurface.cwRotationMatrix);
+                RubikRotate(FrontCWOperation.rotationEuler, FrontSurface.piecesCoord, BehindSurface.cwRotationMatrix);
                 break;
             case Operation.FrontCCW:
-                RubikRotate(FrontCCWOperation.rotationEuler, FrontSurface.piecesCoord, FrontSurface.ccwRotationMatrix);
+                RubikRotate(FrontCCWOperation.rotationEuler, FrontSurface.piecesCoord, BehindSurface.ccwRotationMatrix);
                 break;
             case Operation.BehindCW:
                 RubikRotate(BehindCWOperation.rotationEuler, BehindSurface.piecesCoord, BehindSurface.cwRotationMatrix);
@@ -272,6 +276,7 @@ public class Rubik : MonoBehaviour
             {
                 foreach (PieceBase piece in GetSurfacePieces(piecesCoord))
                 {
+
                     piece.transform.SetParent(rotationRoot.parent);
                 }
                 isRotation = false;
@@ -336,5 +341,31 @@ public class Rubik : MonoBehaviour
         }
 
         return piecesCoord;
+    }
+
+    /// <summary>
+    /// 获取随机状态
+    /// </summary>
+    public void RandomRubik()
+    {
+        List<Operation> randomOperations = new List<Operation>();
+        for(int i = 0; i < 50; i++)
+        {
+            randomOperations.Add(GetRandomOperation());
+        }
+
+        operationController.UpdateOperationList(randomOperations);
+    }
+
+    /// <summary>
+    /// 获取随机操作值
+    /// </summary>
+    /// <returns></returns>
+    private Operation GetRandomOperation()
+    {
+        Operation[] values = (Operation[])System.Enum.GetValues(typeof(Operation));
+        int index = Random.Range(0, values.Length - 1);
+
+        return values[index];
     }
 }

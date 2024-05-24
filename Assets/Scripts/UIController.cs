@@ -23,10 +23,12 @@ public class UIController : MonoBehaviour
     public TMP_InputField inputField;
 
     private bool operationButtonPanelIsOpen = false;
+    private Rubik rubik;
     private OperationController operationController;
 
     void Start()
     {
+        rubik = GameObject.Find("Rubik").GetComponent<Rubik>();
         operationController = GameObject.Find("GameController").GetComponent<OperationController>();
 
         Utils.showOnUIAction += SetMessageText;
@@ -78,9 +80,14 @@ public class UIController : MonoBehaviour
         operationButtonPanel.localScale = operationButtonPanelIsOpen ? Vector3.zero : Vector3.one;
     }
 
+    private void OnClickRandomRubikHandler()
+    {
+        rubik.RandomRubik();
+    }
+
     private void OnClickResetRubikHandler()
     {
-
+        rubik.ResetRubik();
     }
 
     private void OnClickOperationButtonHandler(string opName)

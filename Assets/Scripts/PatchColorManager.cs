@@ -40,15 +40,22 @@ public class PatchColorManager : MonoBehaviour
 
     private void TapRaycast()
     {
-        if(Input.touchCount == 1)
+        for(int i = 0; i < Input.touchCount; i++)
         {
-            ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-            if(Physics.Raycast(ray, out raycastHit))
+            if(Input.GetTouch(i).phase == TouchPhase.Began)
             {
-                if (raycastHit.transform.tag == "Patch")
+                if(Input.GetTouch(i).tapCount == 2)
                 {
-                    SetPatchColor(1);
-                    patch = raycastHit.transform.gameObject;
+                    Debug.Log("双击检测");
+                    ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
+                    if (Physics.Raycast(ray, out raycastHit))
+                    {
+                        if (raycastHit.transform.tag == "Patch")
+                        {
+                            SetPatchColor(1);
+                            patch = raycastHit.transform.gameObject;
+                        }
+                    }
                 }
             }
         }
