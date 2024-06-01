@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class DragModel : MonoBehaviour
 {
-    public GameObject model;
     public float rotationSpeed = 50f;
 
     private Vector3 previousMousePosition;
@@ -38,7 +37,7 @@ public class DragModel : MonoBehaviour
 
             Quaternion rotation = Quaternion.Euler(0, rotX, rotY);
 
-            model.transform.Rotate(rotation.eulerAngles);
+            transform.Rotate(rotation.eulerAngles);
 
             previousMousePosition = currentMousePosition;
         }
@@ -56,7 +55,7 @@ public class DragModel : MonoBehaviour
 
             Quaternion rotation = Quaternion.Euler(0, rotX, rotY);
 
-            model.transform.Rotate(rotation.eulerAngles);
+            transform.Rotate(rotation.eulerAngles);
 
             previousMousePosition = currentMousePosition;
         }

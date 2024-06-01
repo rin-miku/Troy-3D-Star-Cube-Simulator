@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class UIController : MonoBehaviour
 {
@@ -15,7 +16,9 @@ public class UIController : MonoBehaviour
     public Button resetRubik;
     public Button randomRubik;
     public List<Button> operationButtons;
+    public List<Button> colorButtons;
     public Transform operationButtonPanel;
+    public Transform colorButtonPanel;
     public Transform otherButtons;
     public Sprite play;
     public Sprite pause;
@@ -29,7 +32,12 @@ public class UIController : MonoBehaviour
     public Button backButton;
     public GameObject aboutPanel;
 
+    [Header("Rubik")]
+    public GameObject rubikPrefab;
+
+    [Header("Property")]
     public bool isAutoExecute = false;
+
     private bool operationButtonPanelIsOpen = false;
     private Rubik rubik;
     private OperationController operationController;
@@ -55,6 +63,11 @@ public class UIController : MonoBehaviour
         foreach(Button operationButton in operationButtons)
         {
             operationButton.onClick.AddListener(() => { OnClickOperationButtonHandler(operationButton.transform.name); });
+        }
+
+        foreach(Button colorButton in colorButtons)
+        {
+            colorButton.onClick.AddListener(() => { OnClickColorButtonHandler(colorButton.transform.name); });
         }
     }
 
@@ -107,7 +120,9 @@ public class UIController : MonoBehaviour
 
     private void OnClickResetRubikHandler()
     {
-        rubik.ResetRubik();
+        Destroy(rubik.gameObject);
+
+        rubik = Instantiate(rubikPrefab).GetComponent<Rubik>();
     }
 
     private void OnClickAboutHandler()
@@ -124,5 +139,31 @@ public class UIController : MonoBehaviour
     {
         Operation operation = operationController.GetOperationType(opName);
         operationController.UpdateOperation(operation);
+    }
+
+    private void OnClickColorButtonHandler(string color)
+    {
+        Debug.Log(color);
+        int materialIndex = 0;
+        switch (color)
+        {
+            case "blue":
+                materialIndex = 0;
+                break;
+            case "green":
+                materialIndex = 1;
+                break;
+            case "red":
+                materialIndex = 2;
+                break;
+            case "yellow":
+                materialIndex = 3;
+                break;
+        }
+
+        // 设置材质
+        rubik.GetComponent<PatchColorManager>().SetPatchColor(materialIndex);
+        // 面板缩小
+        colorButtonPanel.transform.DOScale(0f, 1f);
     }
 }

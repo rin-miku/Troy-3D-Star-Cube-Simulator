@@ -17,6 +17,7 @@ public class Rubik : MonoBehaviour
     public Transform rubikRoot;
     public Transform rotationRoot;
     public float rotationTime = 0.5f;
+    public GameObject rubikPrefab;
 
     public bool isRotation = false;
     private List<PieceBase> pieces = new List<PieceBase>();

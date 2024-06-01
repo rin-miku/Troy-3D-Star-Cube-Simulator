@@ -1,14 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class PatchColorManager : MonoBehaviour
 {
     private Ray ray;
     private RaycastHit raycastHit;
     private GameObject patch;
+    private GameObject colorPanel;
+
+    private bool showColorPanel = false;
 
     public List<Material> patchMaterials;
+
+    private void Start()
+    {
+        colorPanel = GameObject.Find("ColorPanel");
+    }
 
     private void Update()
     {
@@ -26,12 +35,20 @@ public class PatchColorManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (showColorPanel) return;
+            Vector3 mousePos = Input.mousePosition;
+            ray = Camera.main.ScreenPointToRay(mousePos);
             if (Physics.Raycast(ray, out raycastHit))
             {
                 if(raycastHit.transform.tag == "Patch")
                 {
-                    //SetPatchColor(1);
+                    // 颜色面板移动到点击位置并打开
+                    colorPanel.transform.localPosition = new Vector3(mousePos.x - Screen.width / 2, mousePos.y - Screen.height / 2, 0f); ;
+                    colorPanel.transform.localScale = Vector3.zero;
+                    colorPanel.transform.DOScale(1f, 1f);
+                    // 更改状态
+                    showColorPanel = true;
+                    
                     patch = raycastHit.transform.gameObject;
                 }
             }

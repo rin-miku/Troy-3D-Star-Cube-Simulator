@@ -133,17 +133,18 @@ public class OperationController : MonoBehaviour
         UpdateOperationsText();
     }
 
-    public void RemoveOperationAfterNode()
+    /// <summary>
+    /// 除头结点全部移除 重置魔方状态
+    /// </summary>
+    public void ClearOperation()
     {
-        while(operationList.Last != operationNode)
+        while(operationList.Count > 1)
         {
             operationList.RemoveLast();
         }
-    }
+        operationNode = operationList.First;
+        addOperationNode = operationNode;
 
-    public void ClearOperation()
-    {
-        operationList.Clear();
         UpdateOperationsText();
     }
 
