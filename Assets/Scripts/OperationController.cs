@@ -124,10 +124,11 @@ public class OperationController : MonoBehaviour
         }
         else
         {
+            // fix: 先执行当前结点操作 再移动到上一结点
+            rubik.ExecuteOperation(GetReverseOperation(operationNode.Value));
             // 有上一个节点就执行操作
             operationNode = operationNode.Previous;
             addOperationNode = operationNode;
-            rubik.ExecuteOperation(operationNode.Value);
         }
         UpdateOperationsText();
     }
@@ -247,5 +248,78 @@ public class OperationController : MonoBehaviour
             Utils.PrintLog($"未知的操作类型{operation}，请检查");
             return opName;
         }
+    }
+
+    /// <summary>
+    /// 获取对应操作的反操作
+    /// TODO: 整合进Operation基类？
+    /// </summary>
+    /// <param name="operation"></param>
+    /// <returns></returns>
+    public Operation GetReverseOperation(Operation operation)
+    {
+        Operation result = Operation.Error;
+        switch (operation)
+        {
+            case Operation.UpCW:
+                result = Operation.UpCCW;
+                break;
+            case Operation.UpCCW:
+                result = Operation.UpCW;
+                break;
+            case Operation.DownCW:
+                result = Operation.DownCCW;
+                break;
+            case Operation.DownCCW:
+                result = Operation.DownCW;
+                break;
+            case Operation.LeftCW:
+                result = Operation.LeftCCW;
+                break;
+            case Operation.LeftCCW:
+                result = Operation.LeftCW;
+                break;
+            case Operation.RightCW:
+                result = Operation.RightCCW;
+                break;
+            case Operation.RightCCW:
+                result = Operation.RightCW;
+                break;
+            case Operation.FrontCW:
+                result = Operation.FrontCCW;
+                break;
+            case Operation.FrontCCW:
+                result = Operation.FrontCW;
+                break;
+            case Operation.BehindCW:
+                result = Operation.BehindCCW;
+                break;
+            case Operation.BehindCCW:
+                result = Operation.BehindCW;
+                break;
+            case Operation.XCW:
+                result = Operation.XCCW;
+                break;
+            case Operation.XCCW:
+                result = Operation.XCW;
+                break;
+            case Operation.YCW:
+                result = Operation.YCCW;
+                break;
+            case Operation.YCCW:
+                result = Operation.YCW;
+                break;
+            case Operation.ZCW:
+                result = Operation.ZCCW;
+                break;
+            case Operation.ZCCW:
+                result = Operation.ZCW;
+                break;
+            case Operation.Error:
+                result = Operation.Error;
+                break;
+        }
+
+        return result;
     }
 }
