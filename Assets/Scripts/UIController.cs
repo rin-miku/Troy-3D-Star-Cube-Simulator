@@ -164,6 +164,6 @@ public class UIController : MonoBehaviour
         // 设置材质
         rubik.GetComponent<PatchColorManager>().SetPatchColor(materialIndex);
         // 面板缩小
-        colorButtonPanel.transform.DOScale(0f, 1f);
+        colorButtonPanel.transform.DOScale(0f, 0f);
     }
 }

@@ -86,5 +86,6 @@ public class PatchColorManager : MonoBehaviour
 
         // 操作结束后置空 防止覆盖设置
         patch = null;
+        showColorPanel = false;
     }
 }
