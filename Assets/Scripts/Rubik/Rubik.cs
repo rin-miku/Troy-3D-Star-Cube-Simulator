@@ -136,7 +136,7 @@ public class Rubik : MonoBehaviour
         // 需要射线检测的面片(patch)添加 MeshCollider 和 PatchMaterial 
         foreach(GameObject patch in GameObject.FindGameObjectsWithTag("Patch"))
         {
-            patch.AddComponent<MeshCollider>();
+            //patch.AddComponent<MeshCollider>();
             patch.AddComponent<PatchMaterial>();
         }
     }

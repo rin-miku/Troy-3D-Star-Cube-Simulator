@@ -85,6 +85,8 @@ public class PatchColorManager : MonoBehaviour
 
     private void TapRaycast()
     {
+        if (Input.touchCount <= 0) return;
+
         if(Input.GetTouch(0).phase == TouchPhase.Began)
         {
             Debug.Log("touch began");
@@ -97,6 +99,7 @@ public class PatchColorManager : MonoBehaviour
             ray = Camera.main.ScreenPointToRay(tapPos);
             if (Physics.Raycast(ray, out raycastHit))
             {
+                Debug.Log($"{raycastHit.transform.tag}");
                 if (raycastHit.transform.tag == "Patch")
                 {
                     // 赋值，等待点击松开时判断
