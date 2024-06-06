@@ -108,6 +108,7 @@ public class UIController : MonoBehaviour
         Utils.PrintLog("自动执行剩余操作...", true);
         isAutoExecute = !isAutoExecute;
         otherButtons.localScale = isAutoExecute ? Vector3.zero : Vector3.one;
+        operationButtonPanel.localScale = Vector3.zero;
         autoExecute.GetComponent<Image>().sprite = isAutoExecute ? pause : play;
     }
 
@@ -121,8 +122,8 @@ public class UIController : MonoBehaviour
     private void OnClickResetRubikHandler()
     {
         Destroy(rubik.gameObject);
-
         rubik = Instantiate(rubikPrefab).GetComponent<Rubik>();
+        operationController.SetRubik(rubik);
     }
 
     private void OnClickAboutHandler()

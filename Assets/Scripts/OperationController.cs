@@ -77,6 +77,11 @@ public class OperationController : MonoBehaviour
         addOperationNode = operationNode;
     }
 
+    public void SetRubik(Rubik rubik)
+    {
+        this.rubik = rubik;
+    }
+
     public void UpdateOperation(Operation operation)
     {
         operationList.AddAfter(addOperationNode, operation);

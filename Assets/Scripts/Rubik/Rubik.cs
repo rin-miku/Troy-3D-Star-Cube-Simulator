@@ -18,15 +18,15 @@ public class Rubik : MonoBehaviour
     public Transform rotationRoot;
     public float rotationTime = 0.5f;
     public GameObject rubikPrefab;
-
     public bool isRotation = false;
-    private List<PieceBase> pieces = new List<PieceBase>();
 
+    private List<PieceBase> pieces = new List<PieceBase>();
     private OperationController operationController;
 
     void Start()
     {
         operationController = GameObject.Find("GameController").GetComponent<OperationController>();
+        Debug.Log(rotationRoot.transform.name);
 
         InitRubik();
         InitSurface();
@@ -119,7 +119,7 @@ public class Rubik : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             ResetRubik();
-        }
+        } 
     }
 
     /// <summary>
@@ -277,7 +277,6 @@ public class Rubik : MonoBehaviour
             {
                 foreach (PieceBase piece in GetSurfacePieces(piecesCoord))
                 {
-
                     piece.transform.SetParent(rotationRoot.parent);
                 }
                 isRotation = false;

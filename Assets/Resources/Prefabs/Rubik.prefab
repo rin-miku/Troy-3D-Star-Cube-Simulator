@@ -8636,7 +8636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 252a3d4daf0f8f847a97918de327f56e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 50
+  rotationSpeed: 20
 --- !u!114 &455045020846709124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8649,6 +8649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8396be65656b16d44b0076771fea24bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultMaterial: {fileID: 2100000, guid: 94f29e7eb61ef784396255123c9ce84c, type: 2}
   patchMaterials:
   - {fileID: 2100000, guid: baa6eb650b5f64447b90f8933673e4a5, type: 2}
   - {fileID: 2100000, guid: a2deb0594661f5445b1aa149926de9dd, type: 2}
