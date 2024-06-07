@@ -26,7 +26,6 @@ public class Rubik : MonoBehaviour
     void Start()
     {
         operationController = GameObject.Find("GameController").GetComponent<OperationController>();
-        Debug.Log(rotationRoot.transform.name);
 
         InitRubik();
         InitSurface();

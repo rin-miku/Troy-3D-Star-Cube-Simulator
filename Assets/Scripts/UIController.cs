@@ -144,7 +144,6 @@ public class UIController : MonoBehaviour
 
     private void OnClickColorButtonHandler(string color)
     {
-        Debug.Log(color);
         int materialIndex = 0;
         switch (color)
         {

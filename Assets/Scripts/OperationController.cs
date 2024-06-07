@@ -106,7 +106,10 @@ public class OperationController : MonoBehaviour
         // 寻找下一个结点
         if(operationNode.Next == null)
         {
-            uiController.OnClickAutoExecuteHandler();
+            if (uiController.isAutoExecute)
+            {
+                uiController.OnClickAutoExecuteHandler();
+            }
             Utils.PrintLog("没有下一步操作啦", true);
         }
         else
